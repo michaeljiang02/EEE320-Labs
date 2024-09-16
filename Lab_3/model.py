@@ -15,7 +15,10 @@ class Table:
         self.n_seats = seats
         self.location = location
         # TODO: Uncomment next line
-        # self.orders = [Order() for _ in range(seats)]
+        self.orders = [Order() for _ in range(seats)]
+
+    def order_for(self, seat_number):
+        return self.orders[seat_number]
 
 
 class Order:

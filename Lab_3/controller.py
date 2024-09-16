@@ -1,3 +1,6 @@
+from Lab_3.model import Order
+
+
 class Controller:
     """
     Do not modify this class, just its subclasses. Represents common behaviour of all
@@ -51,11 +54,22 @@ class TableController(Controller):
         self.view.create_table_ui(self.table)
 
     def seat_touched(self, seat_number):
-        pass
+        order_controller = OrderController(self.view, self.restaurant, self.table, seat_number)
+        self.view.set_controller(order_controller)
 
     def done(self):
         restaurant_controller = RestaurantController(self.view, self.restaurant)
         self.view.set_controller(restaurant_controller)
 
 class OrderController(Controller):
-    pass
+
+    def __init__(self, view, restaurant, table, seat_number):
+        super().__init__(view, restaurant)
+        self.table = table
+        self.seat_number = seat_number
+        self.order = self.table.order_for(seat_number)
+
+
+
+    def create_ui(self):
+        self.view.create_order_ui(self.order)
