@@ -69,7 +69,8 @@ class OrderController(Controller):
         self.seat_number = seat_number
         self.order = self.table.order_for(seat_number)
 
-
+    def add_item(self, item):
+        self.order.add_item(item)
 
     def create_ui(self):
         self.view.create_order_ui(self.order)
