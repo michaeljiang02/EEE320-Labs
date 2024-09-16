@@ -53,5 +53,9 @@ class TableController(Controller):
     def seat_touched(self, seat_number):
         pass
 
+    def done(self):
+        restaurant_controller = RestaurantController(self.view, self.restaurant)
+        self.view.set_controller(restaurant_controller)
+
 class OrderController(Controller):
     pass
