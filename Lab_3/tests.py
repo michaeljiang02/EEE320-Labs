@@ -88,15 +88,15 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(the_order.items[0].details, the_menu_item)
         self.assertFalse(the_order.items[0].ordered)
 
-    # def test_order_controller_update_order(self):
-    #     the_order, the_menu_item = self.order_an_item()
-    #     self.view.last_UI_created = None
-    #     self.view.controller.update_order()
-    #     self.assertEqual((TABLE_UI, self.restaurant.tables[2]), self.view.last_UI_created)
-    #     self.assertEqual(1, len(the_order.items))
-    #     self.assertIsInstance(the_order.items[0], OrderItem)
-    #     self.assertEqual(the_order.items[0].details, the_menu_item)
-    #     self.assertTrue(the_order.items[0].ordered)
+    def test_order_controller_update_order(self):
+        the_order, the_menu_item = self.order_an_item()
+        self.view.last_UI_created = None
+        self.view.controller.update_order()
+        #self.assertEqual((TABLE_UI, self.restaurant.tables[2]), self.view.last_UI_created)
+        self.assertEqual(1, len(the_order.items))
+        self.assertIsInstance(the_order.items[0], OrderItem)
+        self.assertEqual(the_order.items[0].details, the_menu_item)
+        self.assertTrue(the_order.items[0].ordered)
 
     # def test_order_controller_cancel(self):
     #     the_order, the_menu_item = self.order_an_item()

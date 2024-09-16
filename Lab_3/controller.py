@@ -74,3 +74,6 @@ class OrderController(Controller):
 
     def create_ui(self):
         self.view.create_order_ui(self.order)
+
+    def update_order(self):
+        self.order.place_new_orders()

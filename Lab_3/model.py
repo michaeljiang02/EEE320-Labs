@@ -30,12 +30,22 @@ class Order:
         item = OrderItem(menu_item)
         self.items.append(item)
 
+    def unordered_items(self):
+        return [item for item in self.items if item.ordered == False]
+
+    def place_new_orders(self):
+        unordered = self.unordered_items()
+        for item in unordered:
+            item.mark_as_ordered()
+
 class OrderItem:
 
     def __init__(self, menu_item):
         self.ordered = False
         self.details = menu_item
 
+    def mark_as_ordered(self):
+        self.ordered = True
 
 class MenuItem:
 
