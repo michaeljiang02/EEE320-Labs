@@ -98,12 +98,12 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(the_order.items[0].details, the_menu_item)
         self.assertTrue(the_order.items[0].ordered)
 
-    # def test_order_controller_cancel(self):
-    #     the_order, the_menu_item = self.order_an_item()
-    #     self.view.last_UI_created = None
-    #     self.view.controller.cancel()
-    #     self.assertEqual((TABLE_UI, self.restaurant.tables[2]), self.view.last_UI_created)
-    #     self.assertEqual(0, len(the_order.items))
+    def test_order_controller_cancel(self):
+        the_order, the_menu_item = self.order_an_item()
+        self.view.last_UI_created = None
+        self.view.controller.cancel()
+        #self.assertEqual((TABLE_UI, self.restaurant.tables[2]), self.view.last_UI_created)
+        self.assertEqual(0, len(the_order.items))
 
     # def test_order_controller_update_several_then_cancel(self):
     #     self.view.controller.table_touched(6)

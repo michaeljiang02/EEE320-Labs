@@ -38,6 +38,11 @@ class Order:
         for item in unordered:
             item.mark_as_ordered()
 
+    def remove_unordered_items(self):
+        unordered = self.unordered_items()
+        for item in unordered:
+            self.items.remove(item)
+
 class OrderItem:
 
     def __init__(self, menu_item):

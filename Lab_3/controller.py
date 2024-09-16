@@ -77,3 +77,6 @@ class OrderController(Controller):
 
     def update_order(self):
         self.order.place_new_orders()
+
+    def cancel(self):
+        self.order.remove_unordered_items()
