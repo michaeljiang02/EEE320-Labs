@@ -71,12 +71,16 @@ class OrderController(Controller):
 
     def add_item(self, item):
         self.order.add_item(item)
+        self.create_ui()
 
     def create_ui(self):
         self.view.create_order_ui(self.order)
 
     def update_order(self):
         self.order.place_new_orders()
+        self.view.set_controller(TableController(self.view, self.restaurant, self.table))
 
     def cancel(self):
         self.order.remove_unordered_items()
+        self.view.set_controller(TableController(self.view, self.restaurant, self.table))
+
