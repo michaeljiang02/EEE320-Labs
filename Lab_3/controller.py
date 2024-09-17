@@ -54,12 +54,10 @@ class TableController(Controller):
         self.view.create_table_ui(self.table)
 
     def seat_touched(self, seat_number):
-        order_controller = OrderController(self.view, self.restaurant, self.table, seat_number)
-        self.view.set_controller(order_controller)
+        self.view.set_controller(OrderController(self.view, self.restaurant, self.table, seat_number))
 
     def done(self):
-        restaurant_controller = RestaurantController(self.view, self.restaurant)
-        self.view.set_controller(restaurant_controller)
+        self.view.set_controller(RestaurantController(self.view, self.restaurant))
 
 class OrderController(Controller):
 
