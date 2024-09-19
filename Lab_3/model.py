@@ -19,6 +19,11 @@ class Table:
     def order_for(self, seat_number):
         return self.orders[seat_number]
 
+    def has_order_for(self, seat_number):
+        if not self.orders[seat_number]:
+            return False
+        return True
+
 class Order:
 
     def __init__(self):
@@ -37,6 +42,12 @@ class Order:
     def remove_unordered_items(self):
         for item in self.unordered_items():
             self.items.remove(item)
+
+    def total_cost(self):
+        sum = 0
+        for item in self.items:
+            sum += item.details.price
+        return sum
 
 class OrderItem:
 

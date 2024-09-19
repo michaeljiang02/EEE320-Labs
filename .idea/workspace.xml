@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="52c0f021-2b35-4c56-9de3-baeb8dba3dc1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/oorms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/oorms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,29 +15,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2mA5P8OX9waWGgAJgyuKzHjyeHh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for tests.OORMSTestCase.executor": "Run",
-    "Python tests.Python tests for tests.OORMSTestCase.test_initial_state.executor": "Run",
-    "Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item.executor": "Run",
-    "Python tests.Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table.executor": "Run",
-    "Python tests.Python tests for tests.OORMSTestCase.test_table_controller_done.executor": "Run",
-    "Python tests.Python tests for tests.OORMSTestCase.test_table_controller_seat_touched.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/micha/OneDrive/Documents/RMC_classes/EEE320/EEE320-Labs"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for tests.OORMSTestCase.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_initial_state.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_cancel.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_order.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_several_then_cancel.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_table_controller_done.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.OORMSTestCase.test_table_controller_seat_touched.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/OneDrive/Documents/RMC_classes/EEE320/EEE320-Labs&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item">
-    <configuration name="Python tests for tests.OORMSTestCase.test_initial_state" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+}</component>
+  <component name="RunManager" selected="Python tests.Python tests for tests.OORMSTestCase">
+    <configuration name="Python tests for tests.OORMSTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="EEE320-Labs" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -52,7 +51,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_initial_state&quot;" />
+      <option name="_new_target" value="&quot;tests.OORMSTestCase&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -71,7 +70,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.OORMSTestCase.test_order_controller_cancel" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="EEE320-Labs" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -82,11 +81,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_restaurant_controller_touch_table&quot;" />
+      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_order_controller_cancel&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for tests.OORMSTestCase.test_table_controller_done" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.OORMSTestCase.test_order_controller_update_order" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="EEE320-Labs" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,11 +96,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_table_controller_done&quot;" />
+      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_order_controller_update_order&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for tests.OORMSTestCase.test_table_controller_seat_touched" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.OORMSTestCase.test_order_controller_update_several_then_cancel" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="EEE320-Labs" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,17 +111,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_table_controller_seat_touched&quot;" />
+      <option name="_new_target" value="&quot;tests.OORMSTestCase.test_order_controller_update_several_then_cancel&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase" />
         <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item" />
-        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_table_controller_seat_touched" />
-        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_table_controller_done" />
-        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table" />
-        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_initial_state" />
+        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_order_controller_cancel" />
+        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_order" />
+        <item itemvalue="Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_several_then_cancel" />
       </list>
     </recent_temporary>
   </component>
