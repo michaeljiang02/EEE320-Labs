@@ -20,9 +20,7 @@ class Table:
         return self.orders[seat_number]
 
     def has_order_for(self, seat_number):
-        if not self.orders[seat_number]:
-            return False
-        return True
+        return self.orders[seat_number].items
 
 class Order:
 
