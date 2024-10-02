@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52c0f021-2b35-4c56-9de3-baeb8dba3dc1" name="Changes" comment="" />
+    <list default="true" id="52c0f021-2b35-4c56-9de3-baeb8dba3dc1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab_3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lab_3/oorms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/oorms.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,5 +152,16 @@
       <updated>1726506513166</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
