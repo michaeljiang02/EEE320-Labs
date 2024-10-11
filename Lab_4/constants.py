@@ -71,4 +71,5 @@ CANCEL_STYLE = {'fill': '#900', 'outline': '#900'}
 NOT_YET_ORDERED_STYLE = {'fill': '#fff', 'outline': '#090'}
 ORDERED_STYLE = BUTTON_STYLE
 
+ORDER_STATES = ['REQUESTED', 'PLACED', 'COOKING', 'READY', 'SERVED']
 

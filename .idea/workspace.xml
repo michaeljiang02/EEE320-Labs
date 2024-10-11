@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52c0f021-2b35-4c56-9de3-baeb8dba3dc1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab_3/oorms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab_3/oorms.py" afterDir="false" />
-    </list>
+    <list default="true" id="52c0f021-2b35-4c56-9de3-baeb8dba3dc1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,23 +21,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Python tests for tests.OORMSTestCase.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_initial_state.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_cancel.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_order.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_several_then_cancel.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_table_controller_done.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.OORMSTestCase.test_table_controller_seat_touched.executor&quot;: &quot;Run&quot;,
-    &quot;Python.oorms.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/micha/Downloads/Lab 2/Lab 2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Python tests for tests.OORMSTestCase.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_initial_state.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_order_controller_add_item.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_order_controller_cancel.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_order.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_order_controller_update_several_then_cancel.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_restaurant_controller_touch_table.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_table_controller_done.executor": "Run",
+    "Python tests.Python tests for tests.OORMSTestCase.test_table_controller_seat_touched.executor": "Run",
+    "Python.oorms.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/micha/OneDrive/Documents/RMC_classes/EEE320/EEE320-Labs/Lab_4"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python tests.Python tests for tests.OORMSTestCase">
     <configuration name="oorms" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="EEE320-Labs" />

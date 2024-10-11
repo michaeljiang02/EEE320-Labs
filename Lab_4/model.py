@@ -1,4 +1,5 @@
-from constants import TABLES, MENU_ITEMS
+from constants import TABLES, MENU_ITEMS, ORDER_STATES
+from enum import Enum
 
 
 class Restaurant:
@@ -53,6 +54,7 @@ class Order:
     def place_new_orders(self):
         for item in self.unordered_items():
             item.mark_as_ordered()
+            item.state = State.PLACED
 
     def remove_unordered_items(self):
         for item in self.unordered_items():
@@ -71,21 +73,27 @@ class OrderItem:
     def __init__(self, menu_item):
         self.details = menu_item
         self.__ordered = False
-
-    def mark_as_ordered(self):
-        self.__ordered = True
+        self.state = State.REQUESTED
 
     def has_been_ordered(self):
         return self.__ordered
+
+    def mark_as_ordered(self):
+        self.__ordered = True
 
     def has_been_served(self):
         # TODO: correct implementation based on item state
         return False
 
     def can_be_cancelled(self):
-        # TODO: correct implementation based on item state
-        return True
+        return self.state == State.PLACED or self.state == State.REQUESTED
 
+class State(Enum):
+    REQUESTED = 1
+    PLACED = 2
+    COOKING = 3
+    READY = 4
+    SERVED = 5
 
 class MenuItem:
 

@@ -120,8 +120,7 @@ class ServerView(RestaurantView):
             if item.can_be_cancelled():
 
                 def handler(_, cancelled_item=item):
-                    # TODO: call appropriate method on controller to remove item from order
-                    pass
+                    self.controller.remove_item(cancelled_item)
 
                 self._make_button('X', handler, size=CANCEL_SIZE, rect_style=CANCEL_STYLE,
                                   location=(x0 - 2*(DOT_SIZE + DOT_MARGIN), y0))
@@ -146,7 +145,7 @@ class KitchenView(RestaurantView):
                     for item in order.items:
                         if item.has_been_ordered() and not item.has_been_served():
                             # TODO: compute button text based on current state of order
-                            button_text = 'label here'
+                            button_text = 'Start Cooking'
 
                             def handler(_, order_item=item):
                                 # TODO: call appropriate method on handler
