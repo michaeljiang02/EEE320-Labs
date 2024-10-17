@@ -76,8 +76,8 @@ class OrderItem:
 
     def next_state(self):
         states = list(State)
-        state_index = states.index(self.state)
-        self.state = states[state_index + 1]
+        next_state_index = (states.index(self.state) + 1) % len(states)
+        self.state = states[next_state_index]
 
     def has_been_ordered(self):
         return self.state != State.REQUESTED

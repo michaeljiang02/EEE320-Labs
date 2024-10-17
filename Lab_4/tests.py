@@ -2,7 +2,7 @@ import unittest
 from enum import Enum, auto
 
 from controller import RestaurantController, TableController, OrderController
-from model import Restaurant, OrderItem
+from model import Restaurant, OrderItem, State
 
 
 class UI(Enum):
@@ -152,15 +152,32 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(self.restaurant.menu_items[1], the_order.items[3].details)
         self.assertEqual(self.restaurant.menu_items[2], the_order.items[4].details)
 
-        # TODO: Cancel a PLACED item
+    # TODO: To write our own tests, we will run our entire program and test everything along the way
+
+    # We start our program by touching seat 7 of table 6 and adding three items to the order
+    def running_program(self):
+        self.view.controller.table_touched(6)
         self.view.controller.seat_touched(7)
-        cancelled_item = the_order.items[3]
+        the_order = self.restaurant.tables[6].order_for(7)
+        self.view.controller.add_item(self.restaurant.menu_items[0])
+        self.view.controller.add_item(self.restaurant.menu_items[3])
+        self.view.controller.add_item(self.restaurant.menu_items[5])
+        self.view.controller.update_order()
+
+    # Now we test whether we can remove
+    def test_cancel_placed_item(self):
+        self.view.controller.table_touched(6)
+        self.view.controller.seat_touched(7)
+        the_order = self.restaurant.tables[6].order_for(7)
+        cancelled_item = the_order.items[2]
+        self.assertEqual(State.REQUESTED, cancelled_item.state)
         self.view.controller.remove_item(cancelled_item)
 
-        self.assertEqual(4, len(the_order.items))
+
+        self.assertEqual(2, len(the_order.items))
         self.assertEqual(False, cancelled_item in the_order.items)
 
-        # TODO: Cancel a COOKING item 
+        # TODO: Cancel a COOKING item
 
 
 
