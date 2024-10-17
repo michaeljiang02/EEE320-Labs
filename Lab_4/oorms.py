@@ -4,7 +4,7 @@ from abc import ABC
 
 from constants import *
 from controller import RestaurantController, KitchenController
-from model import Restaurant
+from model import Restaurant, State
 
 
 class RestaurantView(tk.Frame, ABC):
@@ -145,11 +145,15 @@ class KitchenView(RestaurantView):
                     for item in order.items:
                         if item.has_been_ordered() and not item.has_been_served():
                             # TODO: compute button text based on current state of order
-                            button_text = 'Start Cooking'
+                            if item.state == State.PLACED:
+                                button_text = 'Start cooking'
+                            elif item.state == State.COOKING:
+                                button_text = 'Mark as ready'
+                            elif item.state == State.READY:
+                                button_text = 'Mark as served'
 
                             def handler(_, order_item=item):
-                                # TODO: call appropriate method on handler
-                                pass
+                                self.controller.next_state(order_item)
 
                             self._make_button(button_text, handler,
                                               location=(K_LEFT, line * K_LINE_HEIGHT),

@@ -152,13 +152,15 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(self.restaurant.menu_items[1], the_order.items[3].details)
         self.assertEqual(self.restaurant.menu_items[2], the_order.items[4].details)
 
-        # TODO: Cancel a PLACED item test
+        # TODO: Cancel a PLACED item
         self.view.controller.seat_touched(7)
         cancelled_item = the_order.items[3]
         self.view.controller.remove_item(cancelled_item)
 
         self.assertEqual(4, len(the_order.items))
         self.assertEqual(False, cancelled_item in the_order.items)
+
+        # TODO: Cancel a COOKING item 
 
 
 

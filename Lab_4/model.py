@@ -1,4 +1,4 @@
-from constants import TABLES, MENU_ITEMS, ORDER_STATES
+from constants import TABLES, MENU_ITEMS
 from enum import Enum
 
 
@@ -72,23 +72,27 @@ class OrderItem:
     # TODO: need to represent item state, not just ordered
     def __init__(self, menu_item):
         self.details = menu_item
-        self.__ordered = False
         self.state = State.REQUESTED
 
+    def next_state(self):
+        states = list(State)
+        state_index = states.index(self.state)
+        self.state = states[state_index + 1]
+
     def has_been_ordered(self):
-        return self.__ordered
+        return self.state != State.REQUESTED
 
     def mark_as_ordered(self):
-        self.__ordered = True
+        self.state = State.PLACED
 
     def has_been_served(self):
-        # TODO: correct implementation based on item state
-        return False
+        return self.state == State.SERVED
 
     def can_be_cancelled(self):
         return self.state == State.PLACED or self.state == State.REQUESTED
 
 class State(Enum):
+
     REQUESTED = 1
     PLACED = 2
     COOKING = 3

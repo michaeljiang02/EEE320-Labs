@@ -68,4 +68,6 @@ class KitchenController(Controller):
     def create_ui(self):
         self.view.create_kitchen_order_ui()
 
-    # TODO: implement a method to handle button presses on the KitchenView
+    def next_state(self, item):
+        item.next_state()
+        self.restaurant.notify_views()
