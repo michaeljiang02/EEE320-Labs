@@ -154,30 +154,51 @@ class OORMSTestCase(unittest.TestCase):
 
     # TODO: To write our own tests, we will run our entire program and test everything along the way
 
-    # We start our program by touching seat 7 of table 6 and adding three items to the order
-    def running_program(self):
+    def test_cancel_item(self):
+
+        # We start our program by touching seat 7 of table 6 and adding three items to the order
         self.view.controller.table_touched(6)
         self.view.controller.seat_touched(7)
-        the_order = self.restaurant.tables[6].order_for(7)
         self.view.controller.add_item(self.restaurant.menu_items[0])
         self.view.controller.add_item(self.restaurant.menu_items[3])
         self.view.controller.add_item(self.restaurant.menu_items[5])
-        self.view.controller.update_order()
 
-    # Now we test whether we can remove
-    def test_cancel_placed_item(self):
-        self.view.controller.table_touched(6)
-        self.view.controller.seat_touched(7)
+        # Now we test whether we can cancel a REQUESTED item by pressing X
         the_order = self.restaurant.tables[6].order_for(7)
         cancelled_item = the_order.items[2]
         self.assertEqual(State.REQUESTED, cancelled_item.state)
         self.view.controller.remove_item(cancelled_item)
-
-
         self.assertEqual(2, len(the_order.items))
         self.assertEqual(False, cancelled_item in the_order.items)
 
-        # TODO: Cancel a COOKING item
+        # Now we check whether we can cancel a PLACED item by pressing X
+        self.view.controller.add_item(self.restaurant.menu_items[5])
+        self.view.controller.update_order()
+        self.view.controller.seat_touched(7)
+        the_order = self.restaurant.tables[6].order_for(7)
+        cancelled_item = the_order.items[2]
+        self.view.controller.remove_item(cancelled_item)
+        self.assertEqual(2, len(the_order.items))
+        self.assertEqual(False, cancelled_item in the_order.items)
+
+        # Now we check whether you can cancel a COOKING item
+        # There are currently two items in the order
+        the_order = self.restaurant.tables[6].order_for(7)
+        the_order.items[0].next_state()
+        item = the_order.items[0]
+        self.assertEqual(State.COOKING, item.state)
+        self.assertEqual(False, item.can_be_cancelled())
+        # This shows us that a COOKING item cannot be cancelled, the red X won't appear
+
+        # Now let's verify for other states
+        item.next_state()
+        self.assertEqual(State.READY, item.state)
+        self.assertEqual(False, item.can_be_cancelled())
+
+        item.next_state()
+        self.assertEqual(State.SERVED, item.state)
+        self.assertEqual(False, item.can_be_cancelled())
+        # Conclusion: the red X should only appear when the item is in REQUESTED or PLACED state
 
 
 

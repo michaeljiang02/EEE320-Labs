@@ -76,6 +76,7 @@ class OrderItem:
 
     def next_state(self):
         states = list(State)
+        # The modulo operator ensures that the method doesn't raise an IndexError
         next_state_index = (states.index(self.state) + 1) % len(states)
         self.state = states[next_state_index]
 
