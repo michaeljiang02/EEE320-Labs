@@ -154,7 +154,6 @@ class KitchenView(RestaurantView):
 
                             def handler(_, order_item=item):
                                 self.controller.next_state(order_item)
-
                             self._make_button(button_text, handler,
                                               location=(K_LEFT, line * K_LINE_HEIGHT),
                                               size=K_BUTTON_SIZE)

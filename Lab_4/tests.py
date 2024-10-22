@@ -200,5 +200,58 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(False, item.can_be_cancelled())
         # Conclusion: the red X should only appear when the item is in REQUESTED or PLACED state
 
+    # TODO: We will test whether the next_state() method has the correct functionality.
+    # TODO: We will also test whether each state has the appropriate behavior.
+
+    def test_next_state(self):
+
+        # We start by touching seat 7 of table 6 and adding an item to the order.
+        self.view.controller.table_touched(6)
+        self.view.controller.seat_touched(7)
+        self.view.controller.add_item(self.restaurant.menu_items[0])
+        the_order = self.restaurant.tables[6].order_for(7)
+        item = the_order.items[0]
+
+        # We test the behavior of the REQUESTED state of the item when it's added to the order
+        self.assertEqual(State.REQUESTED, item.state)
+        self.assertEqual(False, item.has_been_ordered())
+        self.assertEqual(False, item.has_been_served())
+        self.assertEqual(True, item.can_be_cancelled())
+
+        # Once REQUESTED state behaves correctly, we move to the PLACED state by updating the order
+        self.view.controller.update_order()
+        self.assertEqual(State.PLACED, item.state)
+        self.assertEqual(True, item.has_been_ordered())
+        self.assertEqual(False, item.has_been_served())
+        self.assertEqual(True, item.can_be_cancelled())
+
+        # Once PLACED state behaves correctly, we move to the COOKING state by pressing 'Start Cooking' which calls next_state()
+        item.next_state()
+        self.assertEqual(State.COOKING, item.state)
+        self.assertEqual(True, item.has_been_ordered())
+        self.assertEqual(False, item.has_been_served())
+        self.assertEqual(False, item.can_be_cancelled())
+
+        # Once COOKING state behaves correctly, we move to the READY state by pressing 'Mark as Ready' which calls next_state()
+        item.next_state()
+        self.assertEqual(State.READY, item.state)
+        self.assertEqual(True, item.has_been_ordered())
+        self.assertEqual(False, item.has_been_served())
+        self.assertEqual(False, item.can_be_cancelled())
+
+        # Once READY state behaves correctly, we move to the READY state by pressing 'Mark as Served' which calls next_state()
+        item.next_state()
+        self.assertEqual(State.SERVED, item.state)
+        self.assertEqual(True, item.has_been_ordered())
+        self.assertEqual(True, item.has_been_served())
+        self.assertEqual(False, item.can_be_cancelled())
+
+        # Now that each state behaves correctly, we should test whether next_state() can raise an IndexError
+        item.next_state()
+        self.assertEqual(State.REQUESTED, item.state)
+        # The item state loops back to the first state in the sequence, the method works
+
+
+
 
 
