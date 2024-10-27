@@ -1,0 +1,39 @@
+@startuml
+title: "Preparing Bills"
+Server->ServerView: Selects "Settle Up"
+ServerView->TableController: make_bills(sprinter_window)
+
+TableController->ServerView:set_controller(BillController())
+
+TableController->ServerView: create_bill_ui(table)
+ServerView->Server: displays bill UI
+loop while table has orders
+    loop for seats in this order
+        Server->ServerView: Selects seat to add to current bill
+        ServerView->BillController: select(seat_number)
+        BillController->Table: select(seat_number)
+        Table->Orders: [seat_number].select()
+        BillController->ServerView: update_ui()
+        end
+        Server->ServerView: Selects "Create Bill"
+        ServerView->BillController: new_bill()
+        BillController->Table: new_bill
+            loop for order in table.orders
+                alt if order. selected==true
+                    loop for orderItem in order
+                        Table-->Bill: add_item(orderItem)
+                    end
+                Table->order:delete_all_items
+                end
+            end
+end
+            BillController->ServerView:create_bill_ui(table)
+            ServerView->Server: displays empty table
+
+    Server->ServerView: Presses "Print Bills"
+    ServerView->BillController: print_bills(printer_window)
+    BillController->printer: print(bill)
+    printer->Server: Displays printed bills
+
+
+@enduml
