@@ -82,7 +82,7 @@ class ServerView(RestaurantView):
         self.make_button('Done', action=lambda event: self.controller.done())
         if table.has_any_active_orders():
             self.make_button('Settle Up',
-                action=lambda event: self.controller.make_bills(self.printer_window),
+                action=lambda event: self.controller.make_bills(),
                 location=BUTTON_BOTTOM_LEFT)\
 
 

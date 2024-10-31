@@ -9,7 +9,7 @@ Original code by EEE320 instructors.
 """
 
 from constants import TABLES, MENU_ITEMS
-
+from enum import Enum
 
 class Restaurant:
 
@@ -43,7 +43,8 @@ class Table:
         return False
 
     def select(self,seat_number):
-        self.orders[seat_number].select()
+        if self.has_order_for(seat_number):
+            self.orders[seat_number].select()
 
     def new_bill(self):
         bill=Bill()
@@ -55,7 +56,6 @@ class Table:
                 order.unselect()
         if not bill.is_empty():
             self.bills.append(bill)
-
 
     def has_order_for(self, seat):
         return bool(self.orders[seat].items)
@@ -120,11 +120,11 @@ class Bill:
         self.total=0
 
     def is_empty(self):
-        return len(self.items)==0
+        return not self.items
 
     def add_item(self,menu_item):
         self.items.append(menu_item)
-        self.total+=menu_item.details.price
+        self.total += menu_item.details.price
 
 
 
@@ -149,6 +149,12 @@ class OrderItem:
     def can_be_cancelled(self):
         # TODO: correct implementation based on item state
         return True
+
+class State(Enum):
+
+    PLACED = 1
+    SELECTED = 2
+    BILLED = 3
 
 
 class MenuItem:

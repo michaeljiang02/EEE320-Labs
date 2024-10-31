@@ -39,10 +39,9 @@ class TableController(Controller):
         self.view.set_controller(OrderController(self.view, self.restaurant, self.table, seat_number))
         self.view.update()
 
-    def make_bills(self, printer):
+    def make_bills(self):
         self.view.set_controller(BillController(self.view, self.restaurant, self.table))
-        self.view.create_bill_ui(self.table)
-
+        self.view.update()
 
     def done(self):
         self.view.set_controller(RestaurantController(self.view, self.restaurant))
@@ -55,16 +54,16 @@ class BillController(Controller):
         super().__init__(view, restaurant)
         self.table = table
 
-    def update_ui(self):
+    def create_ui(self):
         self.view.create_bill_ui(self.table)
 
     def select(self, seat_number):
         self.table.select(seat_number)
-        self.update_ui()
+        self.view.update()
 
     def new_bill(self):
         self.table.new_bill()
-        self.update_ui()
+        self.view.update()
 
     def print_bills(self,printer):
         printer.print(f'Set up bills for table {self.restaurant.tables.index(self.table)}')
@@ -78,6 +77,8 @@ class BillController(Controller):
         self.view.set_controller(RestaurantController(self.view, self.restaurant))
         self.table.reset_table()
         self.view.update()
+
+
 
 class OrderController(Controller):
     def __init__(self, view, restaurant, table, seat_number):
