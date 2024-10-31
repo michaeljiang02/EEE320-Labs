@@ -101,6 +101,10 @@ class ServerView(RestaurantView):
             self.make_button('Create Bill',
                              action=lambda event: self.controller.new_bill(),
                              location=BUTTON_BOTTOM_LEFT)
+        if table.has_selected_orders():
+            self.make_button('Cancel',
+                             action=lambda event: self.controller.cancel(),
+                             location=BUTTON_BOTTOM_RIGHT)
 
     def draw_table(self, table, location=None, scale=1):
         offset_x0, offset_y0 = location if location else table.location

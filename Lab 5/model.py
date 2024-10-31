@@ -37,9 +37,14 @@ class Table:
 
     def has_any_active_orders(self):
         for order in self.orders:
-            for item in order.items:
-                if item.has_been_ordered() and not item.has_been_served():
-                    return True
+            if order.state == State.PLACED or order.state == State.SELECTED:
+                return True
+        return False
+
+    def has_selected_orders(self):
+        for order in self.orders:
+            if order.state == State.SELECTED:
+                return True
         return False
 
     def select(self,seat_number):
@@ -49,11 +54,12 @@ class Table:
     def new_bill(self):
         bill=Bill()
         for order in self.orders:
-            if order.selected:
+            if order.state == State.SELECTED:
                 for items in order.items:
                     bill.add_item(items)
                 order.delete_all_items()
                 order.unselect()
+                order.state = State.EMPTY
         if not bill.is_empty():
             self.bills.append(bill)
 
@@ -61,7 +67,7 @@ class Table:
         return bool(self.orders[seat].items)
 
     def selected(self, seat):
-        return self.orders[seat].selected
+        return self.orders[seat].state == State.SELECTED
 
     def order_for(self, seat):
         return self.orders[seat]
@@ -74,14 +80,15 @@ class Table:
 class Order:
     def __init__(self):
         self.items = []
-        self.on_bill=False
+        #self.on_bill=False
         self.selected=False
+        self.state = State.EMPTY
 
     def select(self):
-        self.selected=True
+        self.state = State.SELECTED
 
     def unselect(self):
-        self.selected=False
+        self.state = State.PLACED
 
     def add_item(self, menu_item):
         item = OrderItem(menu_item)
@@ -93,6 +100,7 @@ class Order:
     def place_new_orders(self):
         for item in self.unordered_items():
             item.mark_as_ordered()
+        self.state = State.PLACED
 
     def remove_unordered_items(self):
         for item in self.unordered_items():
@@ -109,7 +117,7 @@ class Order:
         self.items=[]
 
     def is_empty(self):
-        return len(self.items)==0
+        return not self.items
 
 
 
@@ -125,8 +133,6 @@ class Bill:
     def add_item(self,menu_item):
         self.items.append(menu_item)
         self.total += menu_item.details.price
-
-
 
 
 class OrderItem:
@@ -152,9 +158,9 @@ class OrderItem:
 
 class State(Enum):
 
+    EMPTY = 0
     PLACED = 1
     SELECTED = 2
-    BILLED = 3
 
 
 class MenuItem:

@@ -6,7 +6,7 @@ Submission date: [date here]
 
 Original code by EEE320 instructors.
 """
-
+from model import State
 
 class Controller:
 
@@ -59,6 +59,12 @@ class BillController(Controller):
 
     def select(self, seat_number):
         self.table.select(seat_number)
+        self.view.update()
+
+    def cancel(self):
+        for order in self.table.orders:
+            if order.state == State.SELECTED:
+                order.state = State.PLACED
         self.view.update()
 
     def new_bill(self):

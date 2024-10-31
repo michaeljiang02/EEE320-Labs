@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="87486dd9-dfc5-44cb-a0dc-c2fc4fea1345" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Lab_4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Lab_4.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Prepare Bills.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Preparing Bills.puml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../controller.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../model.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../oorms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab 5/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab 5/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab 5/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab 5/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab 5/oorms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab 5/oorms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
