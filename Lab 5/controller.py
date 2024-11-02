@@ -61,21 +61,25 @@ class BillController(Controller):
         self.table.select(seat_number)
         self.view.update()
 
-    def cancel(self):
-        for order in self.table.orders:
-            if order.state == State.SELECTED:
-                order.state = State.PLACED
+    def unselect(self, seat_number):
+        self.table.unselect(seat_number)
         self.view.update()
+
 
     def new_bill(self):
         self.table.new_bill()
         self.view.update()
 
+    def cancel_bills(self):
+        self.table.cancel_bills()
+        self.view.set_controller(TableController(self.view, self.restaurant, self.table))
+        self.restaurant.notify_views()
+
     def print_bills(self,printer):
         printer.print(f'Set up bills for table {self.restaurant.tables.index(self.table)}')
         bill_count=0
         for bill in self.table.bills:
-            bill_count +=1
+            bill_count += 1
             printer.print(f'Bill number {bill_count}')
             for item in bill.items:
                 printer.print(f'{item.details.name}      {item.details.price}')

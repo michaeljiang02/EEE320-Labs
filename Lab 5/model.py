@@ -49,7 +49,11 @@ class Table:
 
     def select(self,seat_number):
         if self.has_order_for(seat_number):
-            self.orders[seat_number].select()
+            self.orders[seat_number].state = State.SELECTED
+
+    def unselect(self,seat_number):
+        if self.order_for(seat_number).state == State.SELECTED:
+            self.orders[seat_number].state = State.PLACED
 
     def new_bill(self):
         bill=Bill()
@@ -57,14 +61,20 @@ class Table:
             if order.state == State.SELECTED:
                 for items in order.items:
                     bill.add_item(items)
-                order.delete_all_items()
-                order.unselect()
+                # order.delete_all_items()
                 order.state = State.EMPTY
         if not bill.is_empty():
             self.bills.append(bill)
 
+    def cancel_bills(self):
+        for order in self.orders:
+            if order.items:
+                order.state = State.PLACED
+        for bill in self.bills:
+            self.bills.remove(bill)
+
     def has_order_for(self, seat):
-        return bool(self.orders[seat].items)
+        return self.orders[seat].items
 
     def selected(self, seat):
         return self.orders[seat].state == State.SELECTED
@@ -78,17 +88,10 @@ class Table:
 
 
 class Order:
+
     def __init__(self):
         self.items = []
-        #self.on_bill=False
-        self.selected=False
         self.state = State.EMPTY
-
-    def select(self):
-        self.state = State.SELECTED
-
-    def unselect(self):
-        self.state = State.PLACED
 
     def add_item(self, menu_item):
         item = OrderItem(menu_item)
@@ -120,12 +123,10 @@ class Order:
         return not self.items
 
 
-
-
 class Bill:
     def __init__(self):
-        self.items=[]
-        self.total=0
+        self.items = []
+        self.total = 0
 
     def is_empty(self):
         return not self.items
@@ -137,7 +138,8 @@ class Bill:
 
 class OrderItem:
 
-    # TODO: need to represent item state, not just 'ordered', all methods will need modifying
+    # In the current lab, the State of OrderItem objects is not relevant to the functionality of the program
+    # For this reason, we kept the ordered attribute.
     def __init__(self, menu_item):
         self.details = menu_item
         self.ordered = False
@@ -148,12 +150,12 @@ class OrderItem:
     def has_been_ordered(self):
         return self.ordered
 
-    def has_been_served(self):
-        # TODO: correct implementation based on item state
-        return False
+    # has_been_served() method has been deleted because it is irrelevant to our program
 
     def can_be_cancelled(self):
-        # TODO: correct implementation based on item state
+        """
+        Since this program does not implement OrderItem states, items can always be cancelled.
+        """
         return True
 
 class State(Enum):

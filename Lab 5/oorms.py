@@ -15,7 +15,7 @@ from abc import ABC
 
 from constants import *
 from controller import RestaurantController
-from model import Restaurant
+from model import Restaurant, State
 
 
 class RestaurantView(tk.Frame, ABC):
@@ -90,8 +90,13 @@ class ServerView(RestaurantView):
         self.canvas.delete(tk.ALL)
         table_id, seat_ids = self.draw_table(table, location=SINGLE_TABLE_LOCATION)
         for ix, seat_id in enumerate(seat_ids):
-            def handler(_, seat_number=ix):
-                self.controller.select(seat_number)
+            if table.order_for(ix).state == State.SELECTED:
+                def handler(_, seat_number=ix):
+                    self.controller.unselect(seat_number)
+            else:
+                def handler(_, seat_number=ix):
+                    self.controller.select(seat_number)
+
             self.canvas.tag_bind(seat_id, '<Button-1>', handler)
 
         if not table.has_any_active_orders():
@@ -100,11 +105,12 @@ class ServerView(RestaurantView):
         if table.has_any_active_orders():
             self.make_button('Create Bill',
                              action=lambda event: self.controller.new_bill(),
-                             location=BUTTON_BOTTOM_LEFT)
-        if table.has_selected_orders():
-            self.make_button('Cancel',
-                             action=lambda event: self.controller.cancel(),
                              location=BUTTON_BOTTOM_RIGHT)
+
+        if table.bills:
+            self.make_button('Cancel Bills',
+                             action=lambda event: self.controller.cancel_bills(),
+                             location=BUTTON_BOTTOM_LEFT)
 
     def draw_table(self, table, location=None, scale=1):
         offset_x0, offset_y0 = location if location else table.location
@@ -123,10 +129,11 @@ class ServerView(RestaurantView):
             seat_bbox = scale_and_offset(seat_x0, seat_y0, SEAT_DIAM, SEAT_DIAM,
                                          offset_x0, offset_y0, scale)
 
-            style=EMPTY_SEAT_STYLE
+            # TODO: Change seat color based on the seat's state
+            style = EMPTY_SEAT_STYLE
             if table.selected(ix):
-                    style=SELECTED_STYLE
-            elif table.has_order_for(ix):
+                    style = SELECTED_STYLE
+            elif table.order_for(ix).state == State.PLACED:
                 style = FULL_SEAT_STYLE
 
             seat_id = self.canvas.create_oval(*seat_bbox, **style)

@@ -10,7 +10,7 @@ Original code by EEE320 instructors.
 import unittest
 from enum import Enum, auto
 from controller import RestaurantController, TableController, OrderController, BillController
-from model import Restaurant, OrderItem, Bill
+from model import Restaurant, OrderItem, Bill, State
 
 
 class UI(Enum):
@@ -217,7 +217,27 @@ class OORMSTestCase(unittest.TestCase):
         self.view.controller.select(1)
         self.view.controller.select(3)
         the_order = self.restaurant.tables[6].order_for(1)
-        # TODO: Change selected to state
-        self.assertEqual(True, the_order.selected)
+        self.assertEqual(State.SELECTED, the_order.state)
+
+        # Test whether we can unselect a seat on the Bill UI and check order State
+        self.view.controller.unselect(1)
+        self.assertEqual(State.PLACED, the_order.state)
+
+        # Add orders of seat 1 and 3 again to Bill 1 and create new Bill
+        self.view.controller.select(1)
+        self.view.controller.new_bill()
+
+        # When we create a new bill, this means that our orders were added to bill 1, let's test that.
+        bills = self.view.controller.table.bills
+        self.assertEqual(1, len(bills))
+        orders = bills[0].items
+        # Since we have two orders of 3 items each, there should be 6 items on the bill.
+        self.assertEqual(6, len(orders))
+
+        # Add orders of seat 7 to Bill 2 and print bills
+        self.view.controller.select(7)
+        self.view.controller.new_bill()
+
+
 
 
