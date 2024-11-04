@@ -48,11 +48,11 @@ class Table:
         return False
 
     def select(self,seat_number):
-        if self.has_order_for(seat_number):
+        if self.orders[seat_number].state == State.PLACED:
             self.orders[seat_number].state = State.SELECTED
 
     def unselect(self,seat_number):
-        if self.order_for(seat_number).state == State.SELECTED:
+        if self.orders[seat_number].state == State.SELECTED:
             self.orders[seat_number].state = State.PLACED
 
     def new_bill(self):
@@ -70,11 +70,10 @@ class Table:
         for order in self.orders:
             if order.items:
                 order.state = State.PLACED
-        for bill in self.bills:
-            self.bills.remove(bill)
+        self.bills.clear()
 
     def has_order_for(self, seat):
-        return self.orders[seat].items
+        return bool(self.orders[seat].items)
 
     def selected(self, seat):
         return self.orders[seat].state == State.SELECTED
@@ -85,6 +84,7 @@ class Table:
     def reset_table(self):
         del self.orders
         self.orders = [Order() for _ in range(self.n_seats)]
+        self.bills.clear()
 
 
 class Order:
@@ -118,9 +118,6 @@ class Order:
     def delete_all_items(self):
         del self.items
         self.items=[]
-
-    def is_empty(self):
-        return not self.items
 
 
 class Bill:

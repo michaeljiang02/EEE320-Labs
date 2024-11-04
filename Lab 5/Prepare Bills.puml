@@ -1,7 +1,7 @@
 @startuml
 title: "Preparing Bills"
 Server->ServerView: Selects "Settle Up"
-ServerView->TableController: make_bills(sprinter_window)
+ServerView->TableController: make_bills(printer_window)
 
 TableController->ServerView:set_controller(BillController())
 

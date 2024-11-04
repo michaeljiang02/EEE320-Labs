@@ -1,0 +1,10 @@
+@startuml
+
+    [*] --> EMPTY
+    EMPTY -> PLACED : Update Order
+    PLACED -> SELECTED : Select seat
+    SELECTED -> PLACED : Unselect seat
+    SELECTED -> EMPTY : Add order to bill
+    EMPTY --> PLACED : Cancel bills
+
+@enduml

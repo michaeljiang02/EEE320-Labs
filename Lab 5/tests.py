@@ -217,6 +217,7 @@ class OORMSTestCase(unittest.TestCase):
         self.view.controller.select(1)
         self.view.controller.select(3)
         the_order = self.restaurant.tables[6].order_for(1)
+        self.assertEqual(self.restaurant.tables[6].has_order_for(1), True)
         self.assertEqual(State.SELECTED, the_order.state)
 
         # Test whether we can unselect a seat on the Bill UI and check order State

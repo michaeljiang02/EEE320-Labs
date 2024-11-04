@@ -83,7 +83,8 @@ class ServerView(RestaurantView):
         if table.has_any_active_orders():
             self.make_button('Settle Up',
                 action=lambda event: self.controller.make_bills(),
-                location=BUTTON_BOTTOM_LEFT)\
+                location=BUTTON_BOTTOM_LEFT)
+            self.canvas.create_text(190, 400, text="Press 'Settle Up' button to start billing process")
 
 
     def create_bill_ui(self, table):
@@ -93,24 +94,33 @@ class ServerView(RestaurantView):
             if table.order_for(ix).state == State.SELECTED:
                 def handler(_, seat_number=ix):
                     self.controller.unselect(seat_number)
-            else:
+            elif table.order_for(ix).state == State.PLACED:
                 def handler(_, seat_number=ix):
                     self.controller.select(seat_number)
+            else:
+                def handler():
+                    pass
 
             self.canvas.tag_bind(seat_id, '<Button-1>', handler)
 
         if not table.has_any_active_orders():
-            self.make_button('Print Bills', action=lambda event: self.controller.print_bills(self.printer_window))
+            self.canvas.create_text(190, 400,
+                                    text=f"All orders billed! Print bills or cancel if you have made a mistake")
+            self.make_button('Print Bills',
+                             action=lambda event: self.controller.print_bills(self.printer_window))
+            self.make_button('Cancel Bills',
+                             action=lambda event: self.controller.cancel_bills(),
+                             location=BUTTON_BOTTOM_LEFT)
 
-        if table.has_any_active_orders():
+        if table.has_selected_orders():
             self.make_button('Create Bill',
                              action=lambda event: self.controller.new_bill(),
                              location=BUTTON_BOTTOM_RIGHT)
 
-        if table.bills:
-            self.make_button('Cancel Bills',
-                             action=lambda event: self.controller.cancel_bills(),
-                             location=BUTTON_BOTTOM_LEFT)
+        if table.has_any_active_orders():
+            bill_number = len(table.bills) + 1
+            self.canvas.create_text(190, 400, text=f"Select orders (green) for bill #{bill_number}")
+
 
     def draw_table(self, table, location=None, scale=1):
         offset_x0, offset_y0 = location if location else table.location

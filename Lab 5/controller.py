@@ -76,14 +76,17 @@ class BillController(Controller):
         self.restaurant.notify_views()
 
     def print_bills(self,printer):
-        printer.print(f'Set up bills for table {self.restaurant.tables.index(self.table)}')
+        printer.print(f'Set up bills for table {self.restaurant.tables.index(self.table)}'.center(40))
         bill_count=0
         for bill in self.table.bills:
             bill_count += 1
-            printer.print(f'Bill number {bill_count}')
+            printer.print("\n")
+            printer.print(f'Bill #{bill_count}\n'.center(40))
             for item in bill.items:
-                printer.print(f'{item.details.name}      {item.details.price}')
-            printer.print(f'Total: {bill.total} \n')
+                printer.print(f'{item.details.name}:      {item.details.price:.2f}  '.rjust(40))
+            printer.print("=" * 40)
+            printer.print(f'Total:      {bill.total:.2f}  '.rjust(40))
+            printer.print("-" * 40)
         self.view.set_controller(RestaurantController(self.view, self.restaurant))
         self.table.reset_table()
         self.view.update()
