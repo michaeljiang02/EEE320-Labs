@@ -9,6 +9,7 @@ Submission date: [date here]
 Original code by EEE320 instructors.
 """
 
+from atexit import register
 import math
 import tkinter as tk
 from abc import ABC
@@ -114,7 +115,7 @@ class ServerView(RestaurantView):
 
         if table.has_selected_orders():
             self.make_button('Create Bill',
-                             action=lambda event: self.controller.new_bill(),
+                             action=lambda event: self.controller.create_bill(),
                              location=BUTTON_BOTTOM_RIGHT)
 
         if table.has_any_active_orders():
@@ -141,7 +142,7 @@ class ServerView(RestaurantView):
 
             # TODO: Change seat color based on the seat's state
             style = EMPTY_SEAT_STYLE
-            if table.selected(ix):
+            if table.order_for(ix).state == State.SELECTED:
                     style = SELECTED_STYLE
             elif table.order_for(ix).state == State.PLACED:
                 style = FULL_SEAT_STYLE
@@ -210,6 +211,10 @@ class Printer(tk.Frame):
         self.tape['state'] = tk.DISABLED
         self.tape.see(tk.END)
 
+        # TODO: print() method should also directly write the bill receipt to a log.txt file.
+        with open("log.txt", "a") as log_file:
+            log_file.write(text + '\n')
+
 
 def scale_and_offset(x0, y0, width, height, offset_x0, offset_y0, scale):
     return ((offset_x0 + x0) * scale,
@@ -217,6 +222,10 @@ def scale_and_offset(x0, y0, width, height, offset_x0, offset_y0, scale):
             (offset_x0 + x0 + width) * scale,
             (offset_y0 + y0 + height) * scale)
 
+def clear_log():
+    # Clear the contents of log.txt
+    with open("log.txt", "w") as log_file:
+        log_file.write("")
 
 if __name__ == "__main__":
     root = tk.Tk()
@@ -241,3 +250,5 @@ if __name__ == "__main__":
     printer_window.geometry(f'{pw}x{ph}+{sx+sw+10}+{sy}')
 
     root.mainloop()
+
+    register(clear_log)

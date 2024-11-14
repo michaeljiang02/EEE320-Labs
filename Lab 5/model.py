@@ -10,6 +10,7 @@ Original code by EEE320 instructors.
 
 from constants import TABLES, MENU_ITEMS
 from enum import Enum
+from abc import ABC
 
 class Restaurant:
 
@@ -55,7 +56,7 @@ class Table:
         if self.orders[seat_number].state == State.SELECTED:
             self.orders[seat_number].state = State.PLACED
 
-    def new_bill(self):
+    def create_bill(self):
         bill=Bill()
         for order in self.orders:
             if order.state == State.SELECTED:
@@ -74,9 +75,6 @@ class Table:
 
     def has_order_for(self, seat):
         return bool(self.orders[seat].items)
-
-    def selected(self, seat):
-        return self.orders[seat].state == State.SELECTED
 
     def order_for(self, seat):
         return self.orders[seat]

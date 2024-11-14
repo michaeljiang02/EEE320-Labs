@@ -181,7 +181,11 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(2, len(the_order.items))
         self.assertEqual(False, cancelled_item in the_order.items)
 
-    # TODO: Now we will test the bill functionality of this lab
+        # We have to note here that our implementation of cancel item completely disregards the state of the item
+        # In fact, the OrderItem class does not have a state as it is not important to this lab
+        # Items are always cancellable in the Order UI
+
+    # TODO: Now we will test the bill functionality of this lab by running through the entire use case
     def test_bill(self):
 
         # We start our program by touching 3 seats in table 6, placing an order of 3 items in each of them
@@ -220,25 +224,49 @@ class OORMSTestCase(unittest.TestCase):
         self.assertEqual(self.restaurant.tables[6].has_order_for(1), True)
         self.assertEqual(State.SELECTED, the_order.state)
 
-        # Test whether we can unselect a seat on the Bill UI and check order State
+        # Test whether we can unselect a seat on the Bill UI
         self.view.controller.unselect(1)
         self.assertEqual(State.PLACED, the_order.state)
 
-        # Add orders of seat 1 and 3 again to Bill 1 and create new Bill
+        # Let's test an edge case, what if you click on an empty seat during the billing process?
+        # The seat should remain empty.
+        self.view.controller.select(2)
+        self.assertEqual(State.EMPTY, self.restaurant.tables[6].order_for(2).state)
+
+        # Select seat 1 again to Bill 1 and create new Bill, this should add both orders to Bill 1
         self.view.controller.select(1)
-        self.view.controller.new_bill()
+        self.view.controller.create_bill()
 
         # When we create a new bill, this means that our orders were added to bill 1, let's test that.
         bills = self.view.controller.table.bills
         self.assertEqual(1, len(bills))
-        orders = bills[0].items
+        items = bills[0].items
         # Since we have two orders of 3 items each, there should be 6 items on the bill.
-        self.assertEqual(6, len(orders))
+        self.assertEqual(6, len(items))
 
         # Add orders of seat 7 to Bill 2 and print bills
         self.view.controller.select(7)
-        self.view.controller.new_bill()
+        self.view.controller.create_bill()
 
+        # Test whether cancel bills and print bills button appear
+        # They should appear when the table does not have any active orders
+        self.assertEqual(False, self.view.controller.table.has_any_active_orders())
+
+        # Test cancel bills, all orders should go back to PLACED, there should be no outstanding bills in the table
+        self.view.controller.cancel_bills()
+        self.assertEqual(State.PLACED, the_order.state)
+        self.assertEqual(0, len(self.view.controller.table.bills))
+
+        # The UI should go back to the table UI
+        self.assertEqual((UI.table, self.view.controller.table), self.view.last_UI_created)
+        self.assertIsInstance(self.view.controller, TableController)
+
+        # Press "Settle Up", select all three seats and create bill
+        self.view.controller.make_bills()
+        self.view.controller.select(1)
+        self.view.controller.select(3)
+        self.view.controller.select(7)
+        self.view.controller.create_bill()
 
 
 

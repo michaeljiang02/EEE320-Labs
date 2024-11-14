@@ -65,15 +65,14 @@ class BillController(Controller):
         self.table.unselect(seat_number)
         self.view.update()
 
-
-    def new_bill(self):
-        self.table.new_bill()
+    def create_bill(self):
+        self.table.create_bill()
         self.view.update()
 
     def cancel_bills(self):
         self.table.cancel_bills()
         self.view.set_controller(TableController(self.view, self.restaurant, self.table))
-        self.restaurant.notify_views()
+        self.view.update()
 
     def print_bills(self,printer):
         printer.print(f'Set up bills for table {self.restaurant.tables.index(self.table)}'.center(40))

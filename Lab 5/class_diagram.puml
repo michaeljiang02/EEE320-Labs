@@ -1,0 +1,80 @@
+@startuml
+Controller <|-- BillController
+Controller <|-- TableController
+Table <-- TableController : table
+Table o--> "0..*" Bill : bills
+Table --> Order : orders
+Order o--> "0..*" OrderItem : items
+Order --> State : state
+Table <-- BillController : table
+Bill o--> "0..*" OrderItem : items
+BillController --> Printer : printer
+Printer --|> tk.Frame
+
+class Controller {
+    __init__(view: ServerView, restaurant: Restaurant)
+    view: ServerView
+    restaurant: Restaurant
+}
+
+
+class BillController {
+    table: Table
+    __init__(table: Table)
+    create_ui()
+    select(seat_number: int)
+    unselect(seat_number: int)
+    create_bill()
+    cancel_bills()
+    print_bills(printer: Printer)
+}
+
+class TableController {
+    table: Table
+    __init__(table: Table)
+    create_ui()
+    seat_touched(seat_number: int)
+    make_bills()
+    done()
+}
+
+class Table {
+    n_seats: int
+    location: Tuple[int, int]
+    orders: List[Order]
+    bills: List[Bill]
+    __init__(seats: int, location: Tuple[int, int])
+    has_any_active_orders(): bool
+    has_selected_orders(): bool
+    select(seat_number: int)
+    unselect(seat_number: int)
+    create_bill()
+    cancel_bills()
+    has_order_for(seat_number: int): bool
+    order_for(seat_number: int): Order
+    reset_table()
+}
+
+class Bill {
+    items: List[MenuItem]
+    total: int
+    is_empty(): bool
+    add_item(menu_item: MenuItem)
+}
+
+class Order {
+    items: List[OrderItem]
+    state: State
+}
+
+class State {
+    EMPTY
+    PLACED
+    SELECTED
+}
+
+class OrderItem {
+    details: MenuItem
+    ordered: bool
+}
+@enduml
