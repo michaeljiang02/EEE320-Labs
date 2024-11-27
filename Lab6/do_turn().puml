@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant World as "World"
+participant GenghisKhan as "GenghisKhan: Creature"
+
+World ->GenghisKhan:do_turn
+alt organ count <  max organs cap
+    GenghisKhan->GenghisKhan:create_organs()
+    alt no cilia and enough strength to create cilia
+        GenghisKhan --> Cilia: Cilia()
+    end
+    alt no type sensor and enough strength to create type sensor
+        GenghisKhan --> CreatureTypeSensor: CreatureTypeSensor()
+    end
+    alt no womb and enough strength to create womb
+        GenghisKhan --> Propagator: GenghisKhanPropagator()
+    end
+    loop while organ count < max organs cap and enough strength to create PhotoGland
+        GenghisKhan --> PhotoGland: PhotoGland()
+    end
+
+else
+    GenghisKhan->GenghisKhan:reproduce_if_able()
+    alt strength > 0.95 * max strength cap
+        GenghisKhan <-- Direction: Direction
+        loop d in Direction
+            GenghisKhan -> CreatureTypeSensor: nursery = sense(d)
+            alt nursery is soil or plant
+                GenghisKhan -> GenghisKhanPropagator: give_birth(strength() * 0.5, d)
+            end
+        end
+    end
+    GenghisKhan->GenghisKhan: did_attack=maneuver_warfare()
+    GenghisKhan <-- Direction: Direction
+    loop d in Direction
+        GenghisKhan -> CreatureTypeSensor: enemy = sense(d)
+        alt enemy is not soil and not GenghisKhan
+            GenghisKhan -> Cilia: move_in_direction(d)
+        end
+    end
+    alt didn't attack
+         GenghisKhan->Cilia:move_in_direction(Direction.random())
+    end alt
+end alt
+
+
+@enduml

@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/class-diagram
+Creature <|-- GenghisKhan
+Creature --|> ABC
+GenghisKhan --> Cilia: cilia
+Cilia --|> Organ
+GenghisKhan --> GenghisKhanPropagator: womb
+GenghisKhanPropagator --|> Propagator
+GenghisKhan --> CreatureTypeSensor: type_sensor
+CreatureTypeSensor --|> Sensor
+Sensor --|> Organ
+Sensor --|> ABC
+Sensor --> Direction: direction
+Cilia --> Direction: bearing
+Direction --|> Enum
+Enum --|> ABC
+Propagator --|> Organ
+Propagator --|> ABC
+GenghisKhan o--> "0..*" PhotoGland
+PhotoGland --|> Organ
+Organ --|> ABC
+Organ --> GenghisKhan: host
+abstract ABC
+
+class PhotoGland{
+{static} F_CREATION_COST: int
+{static} F_MAINTENANCE_COST: int
+}
+
+class Creature {
+
+}
+
+class Organ {
+{static} F_CREATION_COST
+{static} F_MAINTENANCE_COST
+{static} F_USE_COST
+-uses_this_turn: int
+
+__init__(host: Creature)
+host(): Creature
+creation_cost(): int
+use_cost(): int
+maintenance_cost(): int
+f_new_turn()
+f_used_once()
+f_uses_this_turn(): int
+f_defensive_damage(): int
+f_host_would_be_alive_after_use(): bool
+}
+
+class GenghisKhan {
+-instance_count:int
+organ_count: int
+
+init()
+{static} +destroyed()
+{static} +instance_count()
+do_turn()
+create_organs()
+reproduce_if_able()
+maneuver_warfare()
+}
+
+class GenghisKhanPropagator {
+make_child()
+}
+
+class Sensor {
+{static} F_DEFAULT_VALUE
+sense(direction: Direction)
+}
+
+class Cilia {
+move_in_direction(bearing:Direction)
+}
+class CreatureTypeSensor {
+sensor_value(target: Creature)
+}
+
+abstract Enum
+
+class Propagator {
+give_birth(initial_energy: int, direction: Direction)
+{abstract} make_child()
+}
+
+
+
+
+@enduml
