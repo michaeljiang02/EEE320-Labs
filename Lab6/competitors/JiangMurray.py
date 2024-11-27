@@ -32,8 +32,8 @@ class GenghisKhan(Creature):
         if self.organ_count < Creature.MAX_ORGANS:
             self.create_organs()
         else:
-            self.reproduce_if_able()
             did_attack = self.maneuver_warfare()
+            self.reproduce_if_able()
             if not did_attack:
                 self.cilia.move_in_direction(Direction.random())
 
